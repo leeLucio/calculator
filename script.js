@@ -34,3 +34,11 @@ function operate(operator, a, b){
 			break;
 	}
 }
+
+
+let numbers = document.querySelectorAll(".number");
+let screen = document.querySelector(".screen");
+
+numbers.forEach(element => element.addEventListener("click", (event)=>{
+	screen.textContent = screen.textContent + event.target.textContent;
+}))
