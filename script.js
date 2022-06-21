@@ -38,7 +38,12 @@ function operate(operator, a, b){
 
 let numbers = document.querySelectorAll(".number");
 let screen = document.querySelector(".screen");
+let clear = document.querySelector(".clear");
 
 numbers.forEach(element => element.addEventListener("click", (event)=>{
 	screen.textContent = screen.textContent + event.target.textContent;
 }))
+
+clear.addEventListener("click", event =>{
+	screen.textContent = "";
+})
