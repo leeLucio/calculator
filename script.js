@@ -46,13 +46,23 @@ let screen = document.querySelector(".display");
 let clear = document.querySelector(".clear");
 let operators = document.querySelectorAll(".operator");
 let screenResult = document.querySelector(".result");
+let clearAll = document.querySelector(".clear-all");
 
 let pastNumber = 0;
 let pastOperator = null;
 let dotUsed = false;
 
+function reset() {
+	pastNumber = 0;
+	pastOperator = null;
+	dotUsed = false;
+}
+
+
+clear.addEventListener("click", clearDisplay);
+
 numbers.forEach(element => element.addEventListener("click", (event) => {
-	if(dotUsed && element.textContent == "."){
+	if ((dotUsed && element.textContent == "." )|| screen.textContent.length >= 32) {
 		return;
 	}
 
@@ -63,19 +73,29 @@ numbers.forEach(element => element.addEventListener("click", (event) => {
 	}
 }));
 
-clear.addEventListener("click", clearDisplay);
-
 operators.forEach(element => {
 	element.addEventListener("click", () => {
 		if (pastOperator != null) {
-			result = operate(pastOperator, pastNumber, screen.textContent);
-			screen.textContent = result;
+			if(pastOperator != "="){
+				result = operate(pastOperator, pastNumber, screen.textContent);
+				screen.textContent = result;
+			}
+			
+		}
+		if(screen.textContent){
+			pastNumber = Number(screen.textContent);
 		}
 
 		pastOperator = element.textContent;
-		pastNumber = Number(screen.textContent);
 		clearDisplay();
 		screenResult.textContent = pastNumber;
 		dotUsed = false;
+
 	})
 })
+
+clearAll.addEventListener("click", () => {
+	screen.textContent = "";
+	screenResult.textContent = "";
+	reset();
+});
