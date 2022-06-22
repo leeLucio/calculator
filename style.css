@@ -62,6 +62,10 @@ button{
 	font-weight: bold;
 }
 
+button:active{
+	filter: brightness(80%);
+}
+
 .clear-all{
 	width: calc(50% - 5px);
 	flex-grow: 2;
